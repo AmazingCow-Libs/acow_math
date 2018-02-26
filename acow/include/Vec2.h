@@ -48,21 +48,25 @@ public:
     //------------------------------------------------------------------------//
     // Magnitude                                                              //
     //------------------------------------------------------------------------//
-    ACOW_CONSTEXPR_STRICT float Magnitude   () { return sqrtf(x*x + y*y); }
-    ACOW_CONSTEXPR_STRICT float MagnitudeSqr() { return       x*x + y*y;  }
+    ACOW_CONSTEXPR_LOOSE  float Magnitude   () const { return sqrtf(x*x + y*y); }
+    ACOW_CONSTEXPR_STRICT float MagnitudeSqr() const { return       x*x + y*y;  }
 
 
     //------------------------------------------------------------------------//
     // Distance                                                               //
     //------------------------------------------------------------------------//
-    ACOW_CONSTEXPR_STRICT inline float Distance(const Vec2 v2)
+    ACOW_CONSTEXPR_LOOSE inline float Distance(const Vec2 v2) const
     {
-        return sqrtf(powf(x - v2.x, 2) + powf(y - v2.y, 2));
+        return sqrtf(
+            (x - v2.x) * (x - v2.x) +
+            (y - v2.y) * (y - v2.y)
+        );
     }
 
-    ACOW_CONSTEXPR_STRICT inline float DistanceSqr(const Vec2 v2)
+    ACOW_CONSTEXPR_STRICT inline float DistanceSqr(const Vec2 v2) const
     {
-        return powf(x - v2.x, 2) + powf(y - v2.y, 2);
+        return (x - v2.x) * (x - v2.x)
+             + (y - v2.y) * (y - v2.y);
     }
 
 
@@ -75,7 +79,7 @@ public:
         x /= magnitude; y /= magnitude;
     }
 
-    ACOW_CONSTEXPR_LOOSE inline Vec2 Normalized()
+    ACOW_CONSTEXPR_LOOSE inline Vec2 Normalized() const
     {
         auto vec2 = Vec2(*this);
         vec2.Normalize();
@@ -114,10 +118,10 @@ public:
     ACOW_CONSTEXPR_STRICT friend Vec2 operator *(const Vec2 &lhs, const Vec2 &rhs);
     ACOW_CONSTEXPR_STRICT friend Vec2 operator /(const Vec2 &lhs, const Vec2 &rhs);
 
-    ACOW_CONSTEXPR_LOOSE  friend Vec2& operator +=(Vec2 &lhs, const Vec2 &rhs);
-    ACOW_CONSTEXPR_LOOSE  friend Vec2& operator -=(Vec2 &lhs, const Vec2 &rhs);
-    ACOW_CONSTEXPR_LOOSE  friend Vec2& operator *=(Vec2 &lhs, const Vec2 &rhs);
-    ACOW_CONSTEXPR_LOOSE  friend Vec2& operator /=(Vec2 &lhs, const Vec2 &rhs);
+    ACOW_CONSTEXPR_LOOSE friend Vec2& operator +=(Vec2 &lhs, const Vec2 &rhs);
+    ACOW_CONSTEXPR_LOOSE friend Vec2& operator -=(Vec2 &lhs, const Vec2 &rhs);
+    ACOW_CONSTEXPR_LOOSE friend Vec2& operator *=(Vec2 &lhs, const Vec2 &rhs);
+    ACOW_CONSTEXPR_LOOSE friend Vec2& operator /=(Vec2 &lhs, const Vec2 &rhs);
 
 
     ACOW_CONSTEXPR_STRICT friend Vec2 operator*(const Vec2 &lhs, float scalar);
