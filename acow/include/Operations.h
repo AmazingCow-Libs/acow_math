@@ -22,8 +22,8 @@
 
 // std
 #include <cmath>
-// Cooper
-#include "Vec2.h"
+// AmazingCow Libs
+#include "acow/cpp_goodies.h"
 
 
 namespace acow { namespace math {
@@ -52,6 +52,78 @@ Lerp(float s, float e, float t) noexcept
     //Precise formula from wikipedia:
     //  https://en.wikipedia.org/wiki/Linear_interpolation
     return (1.0f - t) * s + (t * e);
+}
+
+
+//----------------------------------------------------------------------------//
+// Power of Two                                                               //
+//----------------------------------------------------------------------------//
+ACOW_CONSTEXPR_STRICT inline bool
+IsPOT(unsigned int value) noexcept
+{
+    //--------------------------------------------------------------------------
+    // Thanks to seander:
+    //   https://graphics.stanford.edu/~seander/bithacks.html
+    return (value && !(value & (value - 1)));
+}
+
+ACOW_CONSTEXPR_LOOSE inline unsigned int
+ClosestPOT(unsigned int value) noexcept
+{
+    value--;
+    value |= value >> 1;
+    value |= value >> 2;
+    value |= value >> 4;
+    value |= value >> 8;
+    value |= value >> 16;
+    value++;
+
+    return value;
+}
+
+//----------------------------------------------------------------------------//
+// Min / Max                                                                  //
+// Taken from seander's bitchacks:                                            //
+//   https://graphics.stanford.edu/~seander/bithacks.html                     //
+//----------------------------------------------------------------------------//
+//------------------------------------------------------------------------------
+// Min
+ACOW_CONSTEXPR_STRICT inline int
+Min(int x, int y) noexcept
+{
+    return (y ^ ((x ^ y) & -(x < y)));
+}
+
+ACOW_CONSTEXPR_STRICT inline unsigned int
+Min(unsigned int x, unsigned int y) noexcept
+{
+    return (y ^ ((x ^ y) & -(x < y)));
+}
+
+template <typename T> inline ACOW_CONSTEXPR_STRICT T
+Min(T& x, T& y) noexcept
+{
+    return (x < y) ? x : y;
+}
+
+//------------------------------------------------------------------------------
+// Max
+ACOW_CONSTEXPR_STRICT inline int
+Max(int x, int y) noexcept
+{
+    return (x ^ ((x ^ y) & -(x < y)));
+}
+
+ACOW_CONSTEXPR_STRICT inline unsigned int
+Max(unsigned int x, unsigned int y) noexcept
+{
+    return (x ^ ((x ^ y) & -(x < y)));
+}
+
+template <typename T> inline ACOW_CONSTEXPR_STRICT T
+Max(T& x, T& y) noexcept
+{
+    return (x > y) ? x : y;
 }
 
 
