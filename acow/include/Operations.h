@@ -46,7 +46,8 @@ T Clamp(const T &v, const T &_min, const T &_max)
 //----------------------------------------------------------------------------//
 // Lerp                                                                       //
 //----------------------------------------------------------------------------//
-inline float Lerp(float s, float e, float t)
+ACOW_CONSTEXPR_STRICT inline float
+Lerp(float s, float e, float t) noexcept
 {
     //Precise formula from wikipedia:
     //  https://en.wikipedia.org/wiki/Linear_interpolation
