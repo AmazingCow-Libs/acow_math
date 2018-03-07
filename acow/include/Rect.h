@@ -352,8 +352,8 @@ inline Rect Rect::GetRect() const noexcept
 //----------------------------------------------------------------------------//
 inline bool Rect::IsEmpty() const
 {
-    return (x2 - x1) != 0
-        && (y2 - y1) != 0;
+    return (x2 - x1) == 0
+        && (y2 - y1) == 0;
 }
 
 inline bool Rect::Contains(const Rect &r) const
@@ -521,5 +521,3 @@ inline Rect::operator SDL_Rect() noexcept
 
 } // namespace math
 } // namespace acow
-
-
