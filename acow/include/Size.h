@@ -25,7 +25,7 @@ public:
     inline float GetWidth () const noexcept;
     inline void SetWidth(float w) noexcept;
 
-    inline float GetWeight() const noexcept;
+    inline float GetHeight() const noexcept;
     inline void SetHeight(float h) noexcept;
 
 
@@ -87,7 +87,7 @@ inline bool Size::IsEmpty() const noexcept { return w == 0 && h == 0; }
 inline float Size::GetWidth() const noexcept { return width; }
 inline void Size::SetWidth(float w) noexcept { width = w;    }
 
-inline float Size::GetWeight() const noexcept { return height; }
+inline float Size::GetHeight() const noexcept { return height; }
 inline void Size::SetHeight(float h) noexcept { height = w;    }
 
 
