@@ -33,6 +33,23 @@ namespace acow { namespace math {
 class Rect
 {
     //------------------------------------------------------------------------//
+    // Static Methods                                                         //
+    //------------------------------------------------------------------------//
+public:
+    #define DEFINE_RECT(_name_, _x_, _y_, _w_, _h_) \
+        ACOW_CONSTEXPR_STRICT inline static Rect    \
+        _name_() noexcept                           \
+        {                                           \
+            return Rect(_x_, _y_, _w_, _h_);        \
+        }
+
+    DEFINE_RECT(Empty, 0, 0, 0, 0)
+    DEFINE_RECT(One,   1, 1, 1, 1)
+
+    #undef DEFINE_RECT
+
+
+    //------------------------------------------------------------------------//
     // CTOR / DTOR                                                            //
     //------------------------------------------------------------------------//
 public:
