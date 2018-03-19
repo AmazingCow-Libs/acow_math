@@ -53,13 +53,18 @@ public:
     // CTOR / DTOR                                                            //
     //------------------------------------------------------------------------//
 public:
-    inline Rect() noexcept;
-    inline Rect(const Vec2 &topLeft, const Vec2 &bottomRight) noexcept;
-    inline Rect(const Vec2 &topLeft, const Size &size) noexcept;
-    inline Rect(float x, float y, float w, float h) noexcept;
+    ACOW_CONSTEXPR_STRICT inline
+    Rect() noexcept;
+
+    ACOW_CONSTEXPR_STRICT inline
+    Rect(const Vec2 &topLeft, const Size &size) noexcept;
+
+    ACOW_CONSTEXPR_STRICT inline
+    Rect(float x, float y, float w, float h) noexcept;
 
     #if (ACOW_MATH_HAS_SDL_SUPPORT)
-    inline explicit Rect(const SDL_Rect &sdlRect) noexcept;
+    ACOW_CONSTEXPR_STRICT inline
+    explicit Rect(const SDL_Rect &sdlRect) noexcept;
     #endif // (ACOW_MATH_HAS_SDL_SUPPORT)
 
 
@@ -67,42 +72,42 @@ public:
     // Position                                                               //
     //------------------------------------------------------------------------//
 public:
-    inline float GetX() const noexcept;
+    ACOW_CONSTEXPR_STRICT inline float GetX() const noexcept;
     inline void  SetX(float x) noexcept;
 
-    inline float GetY() const noexcept;
+    ACOW_CONSTEXPR_STRICT inline float GetY() const noexcept;
     inline void  SetY(float y) noexcept;
 
-    inline float GetLeft() const noexcept;
+    ACOW_CONSTEXPR_STRICT inline float GetLeft() const noexcept;
     inline void  SetLeft(float pos) noexcept;
 
-    inline float GetTop() const noexcept;
+    ACOW_CONSTEXPR_STRICT inline float GetTop() const noexcept;
     inline void  SetTop(float pos) noexcept;
 
-    inline float GetRight() const noexcept;
+    ACOW_CONSTEXPR_STRICT inline float GetRight() const noexcept;
     inline void  SetRight(float pos) noexcept;
 
-    inline float GetBottom() const noexcept;
+    ACOW_CONSTEXPR_STRICT inline float GetBottom() const noexcept;
     inline void  SetBottom(float pos) noexcept;
 
-    inline Vec2 GetCenter() const noexcept;
-    inline void SetCenter(const Vec2 &p) const noexcept;
+    ACOW_CONSTEXPR_STRICT inline Vec2 GetCenter() const noexcept;
+    inline void SetCenter(const Vec2 &p) noexcept;
 
 
     //------------------------------------------------------------------------//
     // Origin                                                                 //
     //------------------------------------------------------------------------//
 public:
-    inline Vec2 GetTopLeft() const noexcept;
+    ACOW_CONSTEXPR_STRICT inline Vec2 GetTopLeft() const noexcept;
     inline void SetTopLeft(const Vec2 &p) noexcept;
 
-    inline Vec2 GetBottomRight() const noexcept;
+    ACOW_CONSTEXPR_STRICT inline Vec2 GetBottomRight() const noexcept;
     inline void SetBottomRight(const Vec2 &p) noexcept;
 
-    inline Vec2 GetTopRight() const noexcept;
+    ACOW_CONSTEXPR_STRICT inline Vec2 GetTopRight() const noexcept;
     inline void SetTopRight(const Vec2 &p) noexcept;
 
-    inline Vec2 GetBottomLeft() const noexcept;
+    ACOW_CONSTEXPR_STRICT inline Vec2 GetBottomLeft() const noexcept;
     inline void SetBottomLeft(const Vec2 &p) noexcept;
 
 
@@ -110,13 +115,13 @@ public:
     // Size                                                                   //
     //------------------------------------------------------------------------//
 public:
-    inline Size GetSize() const noexcept;
+    ACOW_CONSTEXPR_STRICT inline Size GetSize() const noexcept;
     inline void SetSize(const Size &s) noexcept;
 
-    inline float GetWidth() const noexcept;
+    ACOW_CONSTEXPR_STRICT inline float GetWidth() const noexcept;
     inline void  SetWidth(float w) noexcept;
 
-    inline float GetHeight() const noexcept;
+    ACOW_CONSTEXPR_STRICT inline float GetHeight() const noexcept;
     inline void  SetHeight(float h) noexcept;
 
 
@@ -129,25 +134,26 @@ public:
     inline void SetRect(float x, float y, float w, float h) noexcept;
     inline void SetRect(const Rect &rect) noexcept;
 
-    inline Rect GetRect() const noexcept;
+    ACOW_CONSTEXPR_STRICT inline Rect GetRect() const noexcept;
 
 
     //------------------------------------------------------------------------//
     // Helper Methods                                                         //
     //------------------------------------------------------------------------//
 public:
-    inline bool IsEmpty() const;
+    ACOW_CONSTEXPR_STRICT inline bool IsEmpty() const;
 
-    inline bool Contains(const Rect &r) const;
-    inline bool Contains(const Vec2 &p) const;
-    inline bool Contains(float x, float y) const;
+    ACOW_CONSTEXPR_STRICT inline bool Contains(const Rect &r) const;
+    ACOW_CONSTEXPR_STRICT inline bool Contains(const Vec2 &p) const;
+    ACOW_CONSTEXPR_STRICT inline bool Contains(float x, float y) const;
 
-    inline bool Intersects(const Rect &r) const noexcept;
-    inline bool GetIntersection(
+    ACOW_CONSTEXPR_STRICT inline bool Intersects(const Rect &r) const noexcept;
+
+    ACOW_CONSTEXPR_STRICT inline bool GetIntersection(
         const Rect &r,
         Rect *pOut_IntersectionRect) const noexcept;
 
-    Rect GetNormalized() const noexcept;
+    ACOW_CONSTEXPR_LOOSE Rect GetNormalized() const noexcept;
     void Normalize() noexcept;
 
 
@@ -158,44 +164,49 @@ public:
     inline void MoveTo(float x, float y) noexcept;
     inline void MoveTo(const Vec2 &p) noexcept;
 
-    inline void MoveLeft(float pos) noexcept;
-    inline void MoveTop(float pos) noexcept;
-    inline void MoveRight(float pos) noexcept;
-    inline void MoveBottom(float pos) noexcept;
-    inline void MoveTopLeft(const Vec2 &p) noexcept;
-    inline void MoveBottomRight(const Vec2 &p) noexcept;
-    inline void MoveTopRight(const Vec2 &p) noexcept;
-    inline void MoveBottomLeft(const Vec2 &p) noexcept;
-    inline void MoveCenter(const Vec2 &p) noexcept;
+    inline void MoveLeft  (float delta) noexcept;
+    inline void MoveTop   (float delta) noexcept;
+    inline void MoveRight (float delta) noexcept;
+    inline void MoveBottom(float delta) noexcept;
+
+    inline void MoveTopLeft    (const Vec2 &delta) noexcept;
+    inline void MoveBottomRight(const Vec2 &delta) noexcept;
+    inline void MoveTopRight   (const Vec2 &delta) noexcept;
+    inline void MoveBottomLeft (const Vec2 &delta) noexcept;
+    inline void MoveCenter     (const Vec2 &delta) noexcept;
 
     inline void Translate(float dx, float dy) noexcept;
-    inline void Translate(const Vec2 &p) noexcept;
+    inline void Translate(const Vec2 &delta) noexcept;
 
-    inline Rect GetTranslated(float dx, float dy) const noexcept;
-    inline Rect GetTranslated(const Vec2 &p) const noexcept;
+    inline Rect
+    GetTranslated(float dx, float dy) const noexcept;
+
+    inline Rect
+    GetTranslated(const Vec2 &delta) const noexcept;
 
 
     //------------------------------------------------------------------------//
     // Operators                                                              //
     //------------------------------------------------------------------------//
 public:
-    friend inline bool operator==(const Rect &lhs, const Rect &rhs) noexcept;
-    friend inline bool operator!=(const Rect &lhs, const Rect &rhs) noexcept;
+    ACOW_CONSTEXPR_STRICT friend inline bool
+    operator==(const Rect &lhs, const Rect &rhs) noexcept;
+
+    ACOW_CONSTEXPR_STRICT friend inline bool
+    operator!=(const Rect &lhs, const Rect &rhs) noexcept;
 
     #if (ACOW_MATH_HAS_SDL_SUPPORT)
-    inline explicit operator SDL_Rect() noexcept;
+    ACOW_CONSTEXPR_STRICT inline
+    explicit operator SDL_Rect() noexcept;
     #endif // (ACOW_MATH_HAS_SDL_SUPPORT)
 
     //------------------------------------------------------------------------//
     // iVars                                                                  //
     //------------------------------------------------------------------------//
 public:
-    union {
-        struct { float x;  float y;  };
-        struct { float x1; float y1; };
-    };
+    float x; float y;
+    float w; float h;
 
-    float x2, y2;
 }; // class Rect
 
 
@@ -207,32 +218,31 @@ public:
 //----------------------------------------------------------------------------//
 // CTOR / DTOR                                                                //
 //----------------------------------------------------------------------------//
-inline Rect::Rect() noexcept
+ACOW_CONSTEXPR_STRICT inline
+Rect::Rect() noexcept
     : Rect(0,0,0,0)
 {
     // Empty...
 }
 
-inline Rect::Rect(const Vec2 &topLeft, const Vec2 &bottomRight) noexcept
-    : Rect(topLeft.x, topLeft.y, bottomRight.x, bottomRight.y)
+ACOW_CONSTEXPR_STRICT inline
+Rect::Rect(const Vec2 &topLeft, const Size &size) noexcept
+    : Rect(topLeft.x, topLeft.y, size.x, size.y)
 {
     // Empty...
 }
 
-inline Rect::Rect(const Vec2 &topLeft, const Size &size) noexcept
-    : Rect(topLeft.x, topLeft.y, size.w, size.y)
-{
-    // Empty...
-}
 
-inline Rect::Rect(float x, float y, float w, float h) noexcept
-    : x1(x), y1(y), x2(x+w), y2(y+h)
+ACOW_CONSTEXPR_STRICT inline
+Rect::Rect(float x, float y, float w, float h) noexcept
+    : x(x), y(y), w(w), h(h)
 {
     // Empty...
 }
 
 #if (ACOW_MATH_HAS_SDL_SUPPORT)
-inline Rect::Rect(const SDL_Rect &sdlRect) noexcept
+ACOW_CONSTEXPR_STRICT inline
+Rect::Rect(const SDL_Rect &sdlRect) noexcept
     : Rect(sdlRect.x, sdlRect.y, sdlRect.w, sdlRect.w)
 {
     // Empty...
@@ -243,33 +253,60 @@ inline Rect::Rect(const SDL_Rect &sdlRect) noexcept
 //----------------------------------------------------------------------------//
 // Position                                                                   //
 //----------------------------------------------------------------------------//
-inline float Rect::GetX() const noexcept  { return x1; }
-inline void  Rect::SetX(float x) noexcept { x1 = x;    }
+// X
+ACOW_CONSTEXPR_STRICT inline float
+Rect::GetX() const noexcept  { return x; }
 
-inline float Rect::GetY() const noexcept  { return y1; }
-inline void  Rect::SetY(float y) noexcept { y1 = y;    }
+inline void
+Rect::SetX(float x) noexcept { this->x = x; }
 
-inline float Rect::GetLeft() const noexcept    { return x1; }
-inline void  Rect::SetLeft(float pos) noexcept { x1 = pos;  }
+// Y
+ACOW_CONSTEXPR_STRICT inline float
+Rect::GetY() const noexcept  { return y; }
 
-inline float Rect::GetTop() const noexcept    { return y1; }
-inline void  Rect::SetTop(float pos) noexcept { y1 = pos;  }
+inline void
+Rect::SetY(float y) noexcept { this-> y= y; }
 
-inline float Rect::GetRight() const noexcept    { return x2; }
-inline void  Rect::SetRight(float pos) noexcept { x2 = pos;  }
+// Left
+ACOW_CONSTEXPR_STRICT inline float
+Rect::GetLeft() const noexcept { return x; }
 
-inline float Rect::GetBottom() const noexcept    { return y2; }
-inline void  Rect::SetBottom(float pos) noexcept { y2 = pos;  }
+inline void
+Rect::SetLeft(float pos) noexcept { x = pos; }
 
-inline Vec2 Rect::GetCenter() const noexcept
+// Top
+ACOW_CONSTEXPR_STRICT inline float
+Rect::GetTop() const noexcept { return y; }
+
+inline void
+Rect::SetTop(float pos) noexcept { y = pos; }
+
+// Right
+ACOW_CONSTEXPR_STRICT inline float
+Rect::GetRight() const noexcept { return (x + w); }
+
+inline void
+Rect::SetRight(float pos) noexcept { x = (pos - w); }
+
+// Bottom
+ACOW_CONSTEXPR_STRICT inline float
+Rect::GetBottom() const noexcept { return (y + h); }
+
+inline void
+Rect::SetBottom(float pos) noexcept { y = (pos - h); }
+
+// Center
+ACOW_CONSTEXPR_STRICT inline Vec2
+Rect::GetCenter() const noexcept
 {
-    // COWTODO(n2omatt): To implement...
-    return Vec2();
+    return Vec2(x * (0.5f + w), y + (h * 0.5f));
 }
 
-inline void Rect::SetCenter(const Vec2 &p) const noexcept
+inline void
+Rect::SetCenter(const Vec2 &p) noexcept
 {
-    // COWTODO(n2omatt): To implement...
+    x = p.x - (w * 0.5f);
+    y = p.y - (h * 0.5f);
 }
 
 
@@ -277,108 +314,115 @@ inline void Rect::SetCenter(const Vec2 &p) const noexcept
 //----------------------------------------------------------------------------//
 // Origin                                                                     //
 //----------------------------------------------------------------------------//
-inline Vec2 Rect::GetTopLeft() const noexcept
+// Top Left
+ACOW_CONSTEXPR_STRICT inline Vec2
+Rect::GetTopLeft() const noexcept
 {
-    return Vec2(x1, y1);
+    return Vec2(x, y);
 }
 
-inline void Rect::SetTopLeft(const Vec2 &p) noexcept
+inline void
+Rect::SetTopLeft(const Vec2 &p) noexcept
 {
-    x1 = p.x;
-    y1 = p.y;
+    x = p.x;
+    y = p.y;
 }
 
+// Bottom Right
+ACOW_CONSTEXPR_STRICT inline Vec2
+Rect::GetBottomRight() const noexcept { return Vec2(x + w, y + h); }
 
-inline Vec2 Rect::GetBottomRight() const noexcept
+inline void
+Rect::SetBottomRight(const Vec2 &p) noexcept
 {
-    return Vec2(x2, y2);
+    SetRight (p.x);
+    SetBottom(p.y);
 }
 
-inline void Rect::SetBottomRight(const Vec2 &p) noexcept
+// Top Right
+ACOW_CONSTEXPR_STRICT inline Vec2
+Rect::GetTopRight() const noexcept { return Vec2(x + w, y); }
+
+inline void
+Rect::SetTopRight(const Vec2 &p) noexcept
 {
-    // COWTODO(n2omatt): To implement...
+    SetRight(p.x);
+    SetTop  (p.y);
 }
 
+// Bottom Left
+ACOW_CONSTEXPR_STRICT inline Vec2
+Rect::GetBottomLeft() const noexcept { return Vec2(x, y + h); }
 
-inline Vec2 Rect::GetTopRight() const noexcept
+inline void
+Rect::SetBottomLeft(const Vec2 &p) noexcept
 {
-    return Vec2(x2, y1);
-}
-
-inline void Rect::SetTopRight(const Vec2 &p) noexcept
-{
-
-}
-
-
-inline Vec2 Rect::GetBottomLeft() const noexcept
-{
-   return Vec2(x2, y2);
-}
-
-inline void Rect::SetBottomLeft(const Vec2 &p) noexcept
-{
-
+    SetLeft  (p.x);
+    SetBottom(p.y);
 }
 
 
 //----------------------------------------------------------------------------//
 // Size                                                                       //
 //----------------------------------------------------------------------------//
-inline Size Rect::GetSize() const noexcept
+// Size
+ACOW_CONSTEXPR_STRICT inline Size
+Rect::GetSize() const noexcept
 {
-    return Size(x2-x1, y2-y1);
+    return Size(w, h);
 }
 
-inline void Rect::SetSize(const Size &s) noexcept
+inline void
+Rect::SetSize(const Size &s) noexcept
 {
-    // COWTODO(n2omatt): To implement...
-}
-
-
-inline float Rect::GetWidth() const noexcept
-{
-    return x2 - x1;
-}
-
-inline void  Rect::SetWidth(float w) noexcept
-{
-    // COWTODO(n2omatt): To implement...
+    w = s.x;
+    h = s.y;
 }
 
 
-inline float Rect::GetHeight() const noexcept
-{
-    return y2 - y1;
-}
+// Width
+ACOW_CONSTEXPR_STRICT inline float
+Rect::GetWidth() const noexcept { return w; }
 
-inline void  Rect::SetHeight(float h) noexcept
-{
-    // COWTODO(n2omatt): To implement...
-}
+inline void
+Rect::SetWidth(float w) noexcept { this->w = w; }
+
+
+// Height
+ACOW_CONSTEXPR_STRICT inline float
+Rect::GetHeight() const noexcept { return h; }
+
+inline void
+Rect::SetHeight(float h) noexcept { this->h = h; }
 
 
 //----------------------------------------------------------------------------//
 // Coords / Rect                                                              //
 //----------------------------------------------------------------------------//
-inline void Rect::SetCoords(float x1, float y1, float x2, float y2) noexcept
+// Coords
+inline void
+Rect::SetCoords(float x1, float y1, float x2, float y2) noexcept
 {
-    this->x1 = x1; this->y1 = y1;
-    this->x2 = x2; this->y2 = y2;
+    this->x = x1;       this->y = y1;
+    this->w = x2 - x1 ; this->h = y2 - y1;
 }
 
-
-inline void Rect::SetRect(float x, float y, float w, float h) noexcept
+// Rect
+inline void
+Rect::SetRect(float x, float y, float w, float h) noexcept
 {
-   //COWTODO(n2omatt): implement....
+   this->x = x; this->y = y;
+   this->w = w; this->h = h;
 }
 
-inline void Rect::SetRect(const Rect &rect) noexcept
+inline void
+Rect::SetRect(const Rect &rect) noexcept
 {
-    //COWTODO(n2omatt): implement....
+    SetRect(rect.x, rect.y, rect.w, rect.h);
 }
 
-inline Rect Rect::GetRect() const noexcept
+ACOW_CONSTEXPR_STRICT inline Rect
+Rect::GetRect() const noexcept
 {
     return *this;
 }
@@ -387,38 +431,42 @@ inline Rect Rect::GetRect() const noexcept
 //----------------------------------------------------------------------------//
 // Helper Methods                                                             //
 //----------------------------------------------------------------------------//
-inline bool Rect::IsEmpty() const
+ACOW_CONSTEXPR_STRICT inline bool
+Rect::IsEmpty() const
 {
-    return (x2 - x1) == 0
-        && (y2 - y1) == 0;
+    return (w == 0) && (h == 0);
 }
 
-inline bool Rect::Contains(const Rect &r) const
-{
-    // COWTODO(n2omatt): To implement...
-    return true;
-}
-
-inline bool Rect::Contains(const Vec2 &p) const
+ACOW_CONSTEXPR_STRICT inline bool
+Rect::Contains(const Rect &r) const
 {
     // COWTODO(n2omatt): To implement...
     return true;
 }
 
-inline bool Rect::Contains(float x, float y) const
+ACOW_CONSTEXPR_STRICT inline bool
+Rect::Contains(const Vec2 &p) const
 {
     // COWTODO(n2omatt): To implement...
     return true;
 }
 
-
-inline bool Rect::Intersects(const Rect &r) const noexcept
+ACOW_CONSTEXPR_STRICT inline bool
+Rect::Contains(float x, float y) const
 {
     // COWTODO(n2omatt): To implement...
     return true;
 }
 
-inline bool Rect::GetIntersection(
+ACOW_CONSTEXPR_STRICT inline bool
+Rect::Intersects(const Rect &r) const noexcept
+{
+    // COWTODO(n2omatt): To implement...
+    return true;
+}
+
+ACOW_CONSTEXPR_STRICT inline bool
+Rect::GetIntersection(
     const Rect &r,
     Rect *pOut_IntersectionRect) const noexcept
 {
@@ -444,76 +492,83 @@ inline bool Rect::GetIntersection(
 //----------------------------------------------------------------------------//
 // Movement                                                                   //
 //----------------------------------------------------------------------------//
-inline void Rect::MoveTo(float x, float y) noexcept
+inline void
+Rect::MoveTo(float x, float y) noexcept
 {
-    x1 = x; y1 = y;
+    this->x = x;
+    this->y = y;
 }
 
-inline void Rect::MoveTo(const Vec2 &p) noexcept
+inline void
+Rect::MoveTo(const Vec2 &p) noexcept
 {
     MoveTo(p.x, p.y);
 }
 
 
-inline void Rect::MoveLeft(float pos) noexcept
+inline void
+Rect::MoveLeft(float delta) noexcept { this->x += delta; }
+
+inline void
+Rect::MoveTop(float delta) noexcept { this->y += delta; }
+
+inline void
+Rect::MoveRight(float delta) noexcept { this->x += delta; }
+
+inline void
+Rect::MoveBottom(float delta) noexcept { this->y = delta; }
+
+inline void
+Rect::MoveTopLeft(const Vec2 &delta) noexcept
 {
-    // COWTODO(n2omatt): Implement...
+    MoveLeft(delta.y);
+    MoveTop (delta.y);
 }
 
-inline void Rect::MoveTop(float pos) noexcept
+inline void
+Rect::MoveBottomRight(const Vec2 &delta) noexcept
 {
-    // COWTODO(n2omatt): Implement...
+    MoveRight (delta.y);
+    MoveBottom(delta.y);
 }
 
-inline void Rect::MoveRight(float pos) noexcept
+inline void
+Rect::MoveTopRight(const Vec2 &delta) noexcept
 {
-    // COWTODO(n2omatt): Implement...
+    MoveRight(delta.x);
+    MoveTop  (delta.y);
 }
 
-inline void Rect::MoveBottom(float pos) noexcept
+inline void
+Rect::MoveBottomLeft(const Vec2 &delta) noexcept
 {
-    // COWTODO(n2omatt): Implement...
+    MoveLeft  (delta.x);
+    MoveBottom(delta.y);
 }
 
-inline void Rect::MoveTopLeft(const Vec2 &p) noexcept
+inline void
+Rect::MoveCenter(const Vec2 &delta) noexcept
 {
-    // COWTODO(n2omatt): Implement...
-}
-
-inline void Rect::MoveBottomRight(const Vec2 &p) noexcept
-{
-    // COWTODO(n2omatt): Implement...
-}
-
-inline void Rect::MoveTopRight(const Vec2 &p) noexcept
-{
-    // COWTODO(n2omatt): Implement...
-}
-
-inline void Rect::MoveBottomLeft(const Vec2 &p) noexcept
-{
-    // COWTODO(n2omatt): Implement...
-}
-
-inline void Rect::MoveCenter(const Vec2 &p) noexcept
-{
-    // COWTODO(n2omatt): Implement...
-}
-
-
-inline void Rect::Translate(float dx, float dy) noexcept
-{
-    x1 += dx;
-    y1 += dy;
-}
-
-inline void Rect::Translate(const Vec2 &p) noexcept
-{
-    Translate(p.x, p.y);
+    SetCenter(GetCenter() + delta);
 }
 
 
-inline Rect Rect::GetTranslated(float dx, float dy) const noexcept
+inline void
+Rect::Translate(float dx, float dy) noexcept
+{
+    x += dx;
+    y += dy;
+}
+
+inline void
+Rect::Translate(const Vec2 &delta) noexcept
+{
+    Translate(delta.x, delta.y);
+}
+
+
+inline Rect
+Rect::GetTranslated(float dx, float dy) const noexcept
 {
     Rect other(*this);
     other.Translate(dx, dy);
@@ -521,7 +576,8 @@ inline Rect Rect::GetTranslated(float dx, float dy) const noexcept
     return other;
 }
 
-inline Rect Rect::GetTranslated(const Vec2 &p) const noexcept
+inline Rect
+Rect::GetTranslated(const Vec2 &p) const noexcept
 {
     return GetTranslated(p.x, p.y);
 }
@@ -530,31 +586,33 @@ inline Rect Rect::GetTranslated(const Vec2 &p) const noexcept
 //----------------------------------------------------------------------------//
 // Operators                                                                  //
 //----------------------------------------------------------------------------//
-inline bool operator==(const Rect &lhs, const Rect &rhs) noexcept
+ACOW_CONSTEXPR_STRICT inline bool
+operator==(const Rect &lhs, const Rect &rhs) noexcept
 {
-    return lhs.x1 == rhs.x1
-        && lhs.y1 == rhs.y1
-        && lhs.x2 == rhs.x2
-        && lhs.y2 == rhs.y2;
+    return lhs.x == rhs.x
+        && lhs.y == rhs.y
+        && lhs.w == rhs.w
+        && lhs.h == rhs.h;
 }
 
-inline bool operator!=(const Rect &lhs, const Rect &rhs) noexcept
+ACOW_CONSTEXPR_STRICT inline bool
+operator!=(const Rect &lhs, const Rect &rhs) noexcept
 {
     return !(lhs == rhs);
 }
 
 #if (ACOW_MATH_HAS_SDL_SUPPORT)
-inline Rect::operator SDL_Rect() noexcept
+ACOW_CONSTEXPR_STRICT inline
+Rect::operator SDL_Rect() noexcept
 {
     return SDL_Rect{
-        int(this->x),
-        int(this->y),
-        int(this->GetWidth ()),
-        int(this->GetHeight())
+        i32(this->x),
+        i32(this->y),
+        i32(this->w),
+        i32(this->h)
     };
 }
 #endif // (ACOW_MATH_HAS_SDL_SUPPORT)
-
 
 } // namespace math
 } // namespace acow
