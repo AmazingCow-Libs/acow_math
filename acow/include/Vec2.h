@@ -66,25 +66,37 @@ public:
     // CTOR / DTOR                                                            //
     //------------------------------------------------------------------------//
 public:
-    ACOW_CONSTEXPR_STRICT explicit Vec2(float x = 0.0f, float y = 0.0f) noexcept
+    ACOW_CONSTEXPR_STRICT explicit
+    Vec2(float x = 0.0f, float y = 0.0f) noexcept
         : x(x), y(y)
     {
         // Empty...
     }
 
 
-
     //------------------------------------------------------------------------//
     // Magnitude                                                              //
     //------------------------------------------------------------------------//
-    ACOW_CONSTEXPR_LOOSE  float Magnitude   () const { return sqrtf(x*x + y*y); }
-    ACOW_CONSTEXPR_STRICT float MagnitudeSqr() const { return       x*x + y*y;  }
+public:
+    ACOW_CONSTEXPR_LOOSE float
+    Magnitude() const noexcept
+    {
+        return sqrtf(x*x + y*y);
+    }
+
+    ACOW_CONSTEXPR_STRICT float
+    MagnitudeSqr() const noexcept
+    {
+        return (x*x) + (y*y);
+    }
 
 
     //------------------------------------------------------------------------//
     // Distance                                                               //
     //------------------------------------------------------------------------//
-    ACOW_CONSTEXPR_LOOSE inline float Distance(const Vec2 v2) const
+public:
+    ACOW_CONSTEXPR_LOOSE inline float
+    Distance(const Vec2 v2) const noexcept
     {
         return sqrtf(
             (x - v2.x) * (x - v2.x) +
@@ -92,7 +104,8 @@ public:
         );
     }
 
-    ACOW_CONSTEXPR_STRICT inline float DistanceSqr(const Vec2 v2) const
+    ACOW_CONSTEXPR_STRICT inline float
+    DistanceSqr(const Vec2 v2) const noexcept
     {
         return (x - v2.x) * (x - v2.x)
              + (y - v2.y) * (y - v2.y);
@@ -102,13 +115,16 @@ public:
     //------------------------------------------------------------------------//
     // Normalize                                                              //
     //------------------------------------------------------------------------//
-    ACOW_CONSTEXPR_LOOSE inline void Normalize()
+public:
+    ACOW_CONSTEXPR_LOOSE inline
+    void Normalize() noexcept
     {
         auto magnitude = Magnitude();
         x /= magnitude; y /= magnitude;
     }
 
-    ACOW_CONSTEXPR_LOOSE inline Vec2 Normalized() const
+    ACOW_CONSTEXPR_LOOSE inline Vec2
+    Normalized() const noexcept
     {
         auto vec2 = Vec2(*this);
         vec2.Normalize();
@@ -120,7 +136,9 @@ public:
     //------------------------------------------------------------------------//
     // Rotation                                                               //
     //------------------------------------------------------------------------//
-    ACOW_CONSTEXPR_LOOSE inline void Rotate(float degrees)
+public:
+    ACOW_CONSTEXPR_LOOSE inline void
+    Rotate(float degrees) noexcept
     {
         auto r = (degrees * math::kDegrees2Radians);
         auto s = sinf(r);
@@ -130,7 +148,8 @@ public:
         y = (x * s + y * c);
     }
 
-    ACOW_CONSTEXPR_LOOSE inline Vec2 Rotated(float degrees) const
+    ACOW_CONSTEXPR_LOOSE inline Vec2
+    Rotated(float degrees) const noexcept
     {
         auto vec2 = Vec2(*this);
         vec2.Rotate(degrees);
@@ -142,19 +161,38 @@ public:
     //------------------------------------------------------------------------//
     // Operators                                                              //
     //------------------------------------------------------------------------//
-    ACOW_CONSTEXPR_STRICT friend Vec2 operator +(const Vec2 &lhs, const Vec2 &rhs);
-    ACOW_CONSTEXPR_STRICT friend Vec2 operator -(const Vec2 &lhs, const Vec2 &rhs);
-    ACOW_CONSTEXPR_STRICT friend Vec2 operator *(const Vec2 &lhs, const Vec2 &rhs);
-    ACOW_CONSTEXPR_STRICT friend Vec2 operator /(const Vec2 &lhs, const Vec2 &rhs);
+public:
+    friend ACOW_CONSTEXPR_STRICT Vec2
+    operator +(const Vec2 &lhs, const Vec2 &rhs) noexcept;
 
-    ACOW_CONSTEXPR_LOOSE friend Vec2& operator +=(Vec2 &lhs, const Vec2 &rhs);
-    ACOW_CONSTEXPR_LOOSE friend Vec2& operator -=(Vec2 &lhs, const Vec2 &rhs);
-    ACOW_CONSTEXPR_LOOSE friend Vec2& operator *=(Vec2 &lhs, const Vec2 &rhs);
-    ACOW_CONSTEXPR_LOOSE friend Vec2& operator /=(Vec2 &lhs, const Vec2 &rhs);
+    friend ACOW_CONSTEXPR_STRICT Vec2
+    operator -(const Vec2 &lhs, const Vec2 &rhs) noexcept;
+
+    friend ACOW_CONSTEXPR_STRICT Vec2
+    operator *(const Vec2 &lhs, const Vec2 &rhs) noexcept;
+
+    friend ACOW_CONSTEXPR_STRICT Vec2
+    operator /(const Vec2 &lhs, const Vec2 &rhs) noexcept;
 
 
-    ACOW_CONSTEXPR_STRICT friend Vec2 operator*(const Vec2 &lhs, float scalar);
-    ACOW_CONSTEXPR_STRICT friend Vec2 operator*(float scalar, const Vec2 &rhs);
+    friend ACOW_CONSTEXPR_LOOSE Vec2&
+    operator +=(Vec2 &lhs, const Vec2 &rhs) noexcept;
+
+    friend ACOW_CONSTEXPR_LOOSE Vec2&
+    operator -=(Vec2 &lhs, const Vec2 &rhs) noexcept;
+
+    friend ACOW_CONSTEXPR_LOOSE Vec2&
+    operator *=(Vec2 &lhs, const Vec2 &rhs) noexcept;
+
+    friend ACOW_CONSTEXPR_LOOSE Vec2&
+    operator /=(Vec2 &lhs, const Vec2 &rhs) noexcept;
+
+
+    friend ACOW_CONSTEXPR_STRICT Vec2
+    operator*(const Vec2 &lhs, float scalar) noexcept;
+
+    friend ACOW_CONSTEXPR_STRICT Vec2
+    operator*(float scalar, const Vec2 &rhs) noexcept;
 
 }; //struct Vec2
 
@@ -162,58 +200,68 @@ public:
 //----------------------------------------------------------------------------//
 // Operators Implementation.                                                  //
 //----------------------------------------------------------------------------//
-ACOW_CONSTEXPR_STRICT inline Vec2 operator +(const Vec2 &lhs, const Vec2 &rhs)
+ACOW_CONSTEXPR_STRICT inline Vec2
+operator +(const Vec2 &lhs, const Vec2 &rhs) noexcept
 {
     return Vec2(lhs.x + rhs.x, lhs.y + rhs.y);
 }
 
-ACOW_CONSTEXPR_STRICT inline Vec2 operator -(const Vec2 &lhs, const Vec2 &rhs)
+ACOW_CONSTEXPR_STRICT inline Vec2
+operator -(const Vec2 &lhs, const Vec2 &rhs) noexcept
 {
     return Vec2(lhs.x - rhs.x, lhs.y - rhs.y);
 }
 
-ACOW_CONSTEXPR_STRICT inline Vec2 operator *(const Vec2 &lhs, const Vec2 &rhs)
+ACOW_CONSTEXPR_STRICT inline Vec2
+operator *(const Vec2 &lhs, const Vec2 &rhs) noexcept
 {
     return Vec2(lhs.x * rhs.x, lhs.y * rhs.y);
 }
 
-ACOW_CONSTEXPR_STRICT inline Vec2 operator /(const Vec2 &lhs, const Vec2 &rhs)
+ACOW_CONSTEXPR_STRICT inline Vec2
+operator /(const Vec2 &lhs, const Vec2 &rhs) noexcept
 {
     return Vec2(lhs.x / rhs.x, lhs.y / rhs.y);
 }
 
 
-ACOW_CONSTEXPR_LOOSE inline Vec2& operator +=(Vec2 &lhs, const Vec2 &rhs)
+ACOW_CONSTEXPR_LOOSE inline Vec2&
+operator +=(Vec2 &lhs, const Vec2 &rhs) noexcept
 {
     lhs.x += rhs.x; lhs.y += rhs.y;
     return lhs;
 }
 
-ACOW_CONSTEXPR_LOOSE inline Vec2& operator -=(Vec2 &lhs, const Vec2 &rhs)
+ACOW_CONSTEXPR_LOOSE inline Vec2&
+operator -=(Vec2 &lhs, const Vec2 &rhs) noexcept
 {
     lhs.x -= rhs.x; lhs.y -= rhs.y;
     return lhs;
 }
 
-ACOW_CONSTEXPR_LOOSE inline Vec2& operator *=(Vec2 &lhs, const Vec2 &rhs)
+ACOW_CONSTEXPR_LOOSE inline Vec2&
+operator *=(Vec2 &lhs, const Vec2 &rhs) noexcept
 {
     lhs.x *= rhs.x; lhs.y *= rhs.y;
     return lhs;
 }
 
-ACOW_CONSTEXPR_LOOSE inline Vec2& operator /=(Vec2 &lhs, const Vec2 &rhs)
+ACOW_CONSTEXPR_LOOSE inline Vec2&
+operator /=(Vec2 &lhs, const Vec2 &rhs) noexcept
 {
     lhs.x /= rhs.x; lhs.y /= rhs.y;
     return lhs;
 }
 
 
-ACOW_CONSTEXPR_STRICT inline Vec2 operator*(const Vec2 &lhs, float scalar)
+ACOW_CONSTEXPR_STRICT inline Vec2
+operator*(const Vec2 &lhs, float scalar) noexcept
 {
     return Vec2(lhs.x * scalar, lhs.y * scalar);
 }
 
-ACOW_CONSTEXPR_STRICT inline Vec2 operator*(float scalar, const Vec2 &rhs)
+ACOW_CONSTEXPR_STRICT inline Vec2
+operator*(float scalar, const Vec2 &rhs) noexcept
 {
     return rhs * scalar;
 }
