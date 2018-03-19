@@ -36,14 +36,23 @@ struct Vec2
     // Static Functions                                                       //
     //------------------------------------------------------------------------//
 public:
-    ACOW_CONSTEXPR_STRICT inline static Vec2 Zero() noexcept { return Vec2{ 0.0f, 0.0f }; }
-    ACOW_CONSTEXPR_STRICT inline static Vec2 One () noexcept { return Vec2{ 1.0f, 1.0f }; }
-    ACOW_CONSTEXPR_STRICT inline static Vec2 Half() noexcept { return Vec2{ 0.5f, 0.5f }; }
+    #define DEFINE_VEC2(_name_, _x_, _y_)        \
+        ACOW_CONSTEXPR_STRICT inline static Vec2 \
+        _name_() noexcept                        \
+        {                                        \
+            return Vec2(_x_, _y_);               \
+        }
 
-    ACOW_CONSTEXPR_STRICT inline static Vec2 Left () noexcept { return Vec2{ -1.0f,  0.0f }; }
-    ACOW_CONSTEXPR_STRICT inline static Vec2 Right() noexcept { return Vec2{ +1.0f,  0.0f }; }
-    ACOW_CONSTEXPR_STRICT inline static Vec2 Up   () noexcept { return Vec2{  0.0f, -1.0f }; }
-    ACOW_CONSTEXPR_STRICT inline static Vec2 Down () noexcept { return Vec2{  0.0f, +1.0f }; }
+    DEFINE_VEC2(Zero, 0.0f, 0.0f )
+    DEFINE_VEC2(One , 1.0f, 1.0f )
+    DEFINE_VEC2(Half, 0.5f, 0.5f )
+
+    DEFINE_VEC2(Left ,  -1.0f,  0.0f )
+    DEFINE_VEC2(Right,  +1.0f,  0.0f )
+    DEFINE_VEC2(Up   ,   0.0f, -1.0f )
+    DEFINE_VEC2(Down ,   0.0f, +1.0f )
+
+    #undef DEFINE_VEC2
 
 
     //-------------------------------------------------------------------------//
