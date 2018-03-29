@@ -59,7 +59,11 @@ public:
     // Public Vars                                                             //
     //-------------------------------------------------------------------------//
 public:
-    float x; float y;
+    union {
+        struct { float data[2];    }
+        struct { float x; float y; }
+        struct { float w; float h; }
+    }
 
 
     //------------------------------------------------------------------------//
