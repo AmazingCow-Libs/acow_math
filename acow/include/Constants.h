@@ -20,7 +20,7 @@
 
 #pragma once
 
-//std
+// std
 #include <cmath>
 
 namespace acow { namespace math {

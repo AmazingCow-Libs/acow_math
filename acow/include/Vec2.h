@@ -43,14 +43,14 @@ public:
             return Vec2(_x_, _y_);               \
         }
 
-    DEFINE_VEC2(Zero, 0.0f, 0.0f )
-    DEFINE_VEC2(One , 1.0f, 1.0f )
-    DEFINE_VEC2(Half, 0.5f, 0.5f )
+    DEFINE_VEC2(Zero, 0.0f, 0.0f)
+    DEFINE_VEC2(One , 1.0f, 1.0f)
+    DEFINE_VEC2(Half, 0.5f, 0.5f)
 
-    DEFINE_VEC2(Left ,  -1.0f,  0.0f )
-    DEFINE_VEC2(Right,  +1.0f,  0.0f )
-    DEFINE_VEC2(Up   ,   0.0f, -1.0f )
-    DEFINE_VEC2(Down ,   0.0f, +1.0f )
+    DEFINE_VEC2(Left ,  -1.0f,  0.0f)
+    DEFINE_VEC2(Right,  +1.0f,  0.0f)
+    DEFINE_VEC2(Up   ,   0.0f, -1.0f)
+    DEFINE_VEC2(Down ,   0.0f, +1.0f)
 
     #undef DEFINE_VEC2
 

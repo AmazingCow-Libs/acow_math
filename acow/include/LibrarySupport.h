@@ -20,7 +20,9 @@
 
 #pragma once
 
-#define ACOW_MATH_HAS_SDL_SUPPORT 1
+//----------------------------------------------------------------------------//
+// SDL                                                                        //
+//----------------------------------------------------------------------------//
 #if (ACOW_MATH_HAS_SDL_SUPPORT)
-#include <SDL.h>
+    #include <SDL.h>
 #endif // (ACOW_MATH_HAS_SDL_SUPPORT)
