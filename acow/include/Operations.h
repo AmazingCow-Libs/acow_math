@@ -120,8 +120,8 @@ Max(unsigned int x, unsigned int y) noexcept
     return (x ^ ((x ^ y) & -(x < y)));
 }
 
-template <typename T> inline ACOW_CONSTEXPR_STRICT T
-Max(T& x, T& y) noexcept
+template <typename T, typename U> inline ACOW_CONSTEXPR_STRICT T
+Max(T& x, U& y) noexcept
 {
     return (x > y) ? x : y;
 }
