@@ -1,20 +1,35 @@
-
 cmake_minimum_required(VERSION 3.5)
 
-##------------------------------------------------------------------------------
-## Project Settings.
-project(acow_math_goodies)
 
+##----------------------------------------------------------------------------##
+## Project                                                                    ##
+##----------------------------------------------------------------------------##
+set(PROJECT acow_math)
+project(${PROJECT})
+
+
+##----------------------------------------------------------------------------##
+## Sources                                                                    ##
+##----------------------------------------------------------------------------##
 ##------------------------------------------------------------------------------
-## Sources.
-add_library(acow_math_goodies
-    acow/src/dummy.cpp
+## Sources
+set(SOURCES
+    acow/src/dummy.cpp ## Just to build the lib.
 )
 
+
+##----------------------------------------------------------------------------##
+## Library                                                                    ##
+##----------------------------------------------------------------------------##
 ##------------------------------------------------------------------------------
+## Lib.
+add_library(${PROJECT} ${SOURCES})
+
+##-----------------------------------------------------------------------------
 ## Include directories.
-target_include_directories(acow_math_goodies PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(${PROJECT} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 ##------------------------------------------------------------------------------
 ## Dependencies.
-target_link_libraries(acow_math_goodies LINK_PUBLIC acow_cpp_goodies)
+target_link_libraries(${PROJECT} LINK_PUBLIC acow_c_goodies  )
+target_link_libraries(${PROJECT} LINK_PUBLIC acow_cpp_goodies)
