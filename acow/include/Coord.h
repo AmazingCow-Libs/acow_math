@@ -330,6 +330,5 @@ operator *=(Coord &lhs, i32 scalar) noexcept
     return lhs;
 }
 
-
 } // namespace math
 } // namespace acow
