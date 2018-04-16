@@ -31,8 +31,8 @@ namespace acow { namespace math {
 //----------------------------------------------------------------------------//
 // Clamp                                                                      //
 //----------------------------------------------------------------------------//
-template <typename T>
-T Clamp(const T &v, const T &_min, const T &_max)
+template <typename T> inline ACOW_CONSTEXPR_STRICT T 
+Clamp(const T &v, const T &_min, const T &_max)
 {
     //COWTODO(n2omatt): We might use std::min, std::max.
     //  So search about perfomance (I saw something on CPPCon...)
